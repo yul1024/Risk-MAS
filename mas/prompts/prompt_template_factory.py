@@ -4,7 +4,9 @@
 仅暴露可直接使用format方法的prompt-template对象。
 """
 
-from langchain.prompts import PromptTemplate
+# from langchain.prompts import PromptTemplate
+from llama_index.core.prompts import LangchainPromptTemplate
+# from llama_index.core.prompts import RichPromptTemplate
 from llama_index.core.llms import ChatMessage, TextBlock, ImageBlock
 
 
