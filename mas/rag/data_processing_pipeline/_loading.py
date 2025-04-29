@@ -3,5 +3,13 @@
 """
 
 
+class PDFToMD:
+    """
+    将原始的pdf转换成md格式文件。
+    """
+    def __init__(self):
+        ...
+
+
 if __name__ == '__main__':
     pass
