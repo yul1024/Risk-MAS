@@ -8,8 +8,10 @@ from langchain_community.document_loaders.parsers import LLMImageBlobParser
 
 from langchain_openai import ChatOpenAI
 
+from llama_index.core import Document
+
 from langchain_core.language_models import BaseChatModel
-from langchain_core.documents import Document
+from langchain_core.documents import Document as LCDocument
 
 import os
 from pathlib import Path
@@ -22,7 +24,7 @@ class PymupdfReader:
     """
     def __init__(
         self,
-        file_path: str,
+        file_path: str | Path,
     ):
         self.file_path = Path(file_path)
         self.loader = None
@@ -32,9 +34,11 @@ class PymupdfReader:
         主要方法。
 
         Returns:
-            langchain中的Document对象。我的默认设置使得加载结果是markdown格式的一个文本对象，会在之后被node-parser处理。
+            llama-index中的Document对象。已经从langchain的Document进行了转换。
+            我的默认设置使得加载结果是markdown格式的一个文本对象，会在之后被node-parser处理。
         """
-        return self.loader.load()
+        lc_docs: list[LCDocument] = self.loader.load()
+        return [Document.from_langchain_format(doc) for doc in lc_docs]
 
     def set_text_only_loader(self):
         """
@@ -69,12 +73,12 @@ class PymupdfReader:
             mode='single',
             extract_images=True,
             images_parser=LLMImageBlobParser(
-                model=self.get_vlm()
+                model=self._get_vlm()
             ),
         )
         self.loader = loader
 
-    def get_vlm(self) -> BaseChatModel:
+    def _get_vlm(self) -> BaseChatModel:
         """
         获取VLM，用于识别pdf文档。
         仅在set_vlm_loader中使用。
