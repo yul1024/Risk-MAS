@@ -9,11 +9,14 @@ from llama_index.core.query_engine import RouterQueryEngine
 
 
 class QueryEngineFactory:
-    def __init__(self):
-        ...
+    def __init__(
+        self,
+        index,
+    ):
+        self.index = index
 
     def get_query_engine(self):
-        ...
+        return self.index.as_query_engine()
 
 
 def get_query_engine_tool(
