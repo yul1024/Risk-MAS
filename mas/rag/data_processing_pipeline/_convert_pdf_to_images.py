@@ -27,15 +27,15 @@ def convert_pdf_to_images(
     # 读取文件。
     pdf_document = fitz.open(pdf_path)
     for page_num in range(pdf_document.page_count):
-        # 加载每一页
+        # 加载每一页。
         page = pdf_document.load_page(page_num)
-        # 将每一页转换为图片 (pixmap)
+        # 将每一页转换为图片 (pixmap)。
         pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
-        # 设置图片保存路径
-        image_path = output_folder / f'{page_num + 1}.png'
-        # 保存为PNG文件
+        # 设置图片保存路径。
+        image_path = output_folder / f'page_{page_num + 1}.png'
+        # 保存为PNG文件。
         pix.save(image_path)
-    # 关闭PDF文件
+    # 关闭PDF文件。
     pdf_document.close()
     print(f"{pdf_path.name} have been saved as images in {output_folder}.")
 
