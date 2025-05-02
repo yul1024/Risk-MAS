@@ -13,3 +13,13 @@ class SubmissionEvent(Event):
     content: str = Field(description="提交给决策层的内容。")
     confidence: float = Field(description="对于提交结果的置信度。")
     metadata: dict
+
+
+class ValidationEvent(Event):
+    """
+    决策模块要求分析模块进行验证的部分。
+    """
+    content: str = Field(description="决策层对于提交分析的质疑。")
+    confidence: float = Field(description="对于提交结果的置信度。")
+    metadata: dict
+
