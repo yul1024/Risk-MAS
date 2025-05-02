@@ -12,7 +12,7 @@ class LLMFactory:
     def __init__(self):
         ...
 
-    def get_qwen(
+    def get_qwen_llm(
         self,
         model: Annotated[str, "qwen系列模型的名字"] = 'qwen-max'
     ) -> OpenAILike:
