@@ -40,5 +40,28 @@ def convert_pdf_to_images(
     print(f"{pdf_path.name} have been saved as images in {output_folder}.")
 
 
+def batch_convert_pdf_to_images(
+    pdf_dir: str | Path,
+    dir_to_save: str | Path = None,
+):
+    """
+
+    Args:
+        pdf_dir:
+        dir_to_save:
+
+    Returns:
+
+    """
+    pdf_dir = Path(pdf_dir)
+    dir_to_save = Path(dir_to_save)
+    dir_to_save.mkdir(exist_ok=True, parents=True)
+    # 识别文件
+    pdf_path_list = list(pdf_dir.glob('*.pdf'))
+    for pdf_path in pdf_path_list:
+        convert_pdf_to_images(pdf_path, dir_to_save / pdf_path.name)
+    print(f"{pdf_dir} have been saved as images in {dir_to_save}.")
+
+
 if __name__ == '__main__':
     pass
