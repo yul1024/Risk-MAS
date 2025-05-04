@@ -1,6 +1,10 @@
 """
-各种构建pdf的vector-store的pipeline。
+由documents到vector-store的pipeline。
+
+使用llama-index内置的IngestionPipeline，使用缓存以加速和节省资源。
 """
+
+from llama_index.core.ingestion import IngestionPipeline
 
 
 class PipelineFactory:
@@ -14,11 +18,6 @@ class PipelineFactory:
         Returns:
 
         """
-        # return DocumentPipeline(
-        #     node_parser=MarkdownNodeParser(),
-        #     embedding_model=,
-        #     vector_store=,
-        # )
 
     def get_ocr_pipeline(self):
         """
