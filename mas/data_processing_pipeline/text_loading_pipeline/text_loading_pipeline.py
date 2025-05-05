@@ -4,11 +4,6 @@
 
 from mas.data_processing_pipeline.text_loading_pipeline.text_loader import PymupdfTextLoader
 
-from llama_index.core.ingestion import IngestionPipeline
-from llama_index.core.node_parser import NodeParser
-from llama_index.core.embeddings import BaseEmbedding
-from llama_index.core.vector_stores.types import BasePydanticVectorStore
-
 from llama_index.core import Document
 
 from pathlib import Path
@@ -34,6 +29,12 @@ class TextLoadingPipeline:
         Returns:
 
         """
+        if mode == 'rule':
+            return self.load_pdf_by_rule()
+        elif mode == 'ocr':
+            return self.load_pdf_by_ocr()
+        elif mode == 'vlm':
+            return self.load_pdf_by_vlm()
 
     def load_pdf_by_rule(self) -> list[Document]:
         """
@@ -70,16 +71,6 @@ class TextLoadingPipeline:
         text_loader.set_vlm_loader()
         text_documents = text_loader.run()
         return text_documents
-
-    def get_pipeline(self) -> IngestionPipeline:
-        pipeline = IngestionPipeline(
-            transformations=[
-                self.node_parser,
-                self.embedding_model,
-            ],
-            vector_store=self.vector_store,
-        )
-        return pipeline
 
 
 if __name__ == '__main__':
