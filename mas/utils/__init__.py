@@ -9,5 +9,4 @@
 
 from .load_prompt_template import load_prompt_template
 
-from .vlm_factory import VLMFactory
-
+from .document_store_manager import DocumentStoreManager
