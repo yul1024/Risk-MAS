@@ -20,7 +20,7 @@ class ImageLoadingPipeline:
         self,
         original_pdf_path: str | Path,
         base_image_pdf_dir: str | Path,
-        is_need_convert: bool = True,
+        is_need_convert: bool = False,
     ):
         self.original_pdf_path = Path(original_pdf_path)
         self.base_image_pdf_dir = Path(base_image_pdf_dir)
