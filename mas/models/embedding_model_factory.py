@@ -9,6 +9,14 @@ from typing import Annotated
 
 
 class EmbeddingModelFactory:
+    """
+    各种embedding-model的工厂。
+
+    实现方法有:
+        - OpenAILikeEmbedding，云API请求。
+        - HuggingFaceEmbedding，本地推理。
+        - BaseEmbeddingModel，我具体实现。
+    """
     def __init__(self):
         ...
 
