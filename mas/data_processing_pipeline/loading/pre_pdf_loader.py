@@ -59,32 +59,32 @@ class PrePdfLoader:
 
     def batch_process_text(
         self,
-        modes: list[str],
+        loading_methods: list[str],
     ):
         """
         批量处理text形式的pdf。
 
         Args:
-            modes:  加载方法，有['rule', 'ocr', 'vlm']。可以进行指定，仅选择其中的几个。
+            loading_methods:  加载方法，有['rule', 'ocr', 'vlm']。可以进行指定，仅选择其中的几个。
 
         Returns:
             每个pdf完成document-store，会打印输出。
         """
-        for mode in modes:
+        for loading_method in loading_methods:
             for pdf_path in self.pdf_path_list:
-                path_to_save = self.document_store_dir / 'text' / f"{mode}--{pdf_path.name}.json"
+                path_to_save = self.document_store_dir / 'text' / f"{loading_method}--{pdf_path.name}.json"
                 if path_to_save.exists():
                     continue
                 self.load_and_save_text_documents(
                     original_pdf_path=pdf_path,
-                    mode=mode,
+                    loading_method=loading_method,
                     path_to_save=path_to_save,
                 )
-            print(f"Text {mode} pdf document store done.")
+            print(f"Text {loading_method} pdf document store done.")
 
     def batch_process_image(
         self,
-        is_need_convert: bool = True,
+        is_need_convert: bool = False,
     ):
         """
         批量处理text形式的pdf。
@@ -110,7 +110,7 @@ class PrePdfLoader:
     def load_and_save_text_documents(
         self,
         original_pdf_path: str | Path,
-        mode: str,
+        loading_method: str,
         path_to_save: str | Path,
     ) -> list[Document]:
         """
@@ -120,7 +120,7 @@ class PrePdfLoader:
 
         Args:
             original_pdf_path: 原始pdf的路径。
-            mode: 加载方法，有['rule', 'ocr', 'vlm']。
+            loading_method: 加载方法，有['rule', 'ocr', 'vlm']。
             path_to_save: 保存document-store的位置，以json格式。
 
         Returns:
@@ -128,7 +128,7 @@ class PrePdfLoader:
         """
         # 加载文档
         text_loading_pipeline = TextLoadingPipeline(original_pdf_path=original_pdf_path)
-        text_documents = text_loading_pipeline.run(mode=mode)
+        text_documents = text_loading_pipeline.run(loading_method=loading_method)
         # 保存文档
         self.document_store_manager.save_nodes(
             documents=text_documents,
