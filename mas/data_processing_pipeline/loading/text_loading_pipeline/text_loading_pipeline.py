@@ -21,19 +21,19 @@ class TextLoadingPipeline:
 
     def run(
         self,
-        mode: str
+        loading_method: str
     ) -> list[Document]:
         """
         主要方法。
 
         Returns:
-
+            对于方法的text加载器。
         """
-        if mode == 'rule':
+        if loading_method == 'rule':
             return self.load_pdf_by_rule()
-        elif mode == 'ocr':
+        elif loading_method == 'ocr':
             return self.load_pdf_by_ocr()
-        elif mode == 'vlm':
+        elif loading_method == 'vlm':
             return self.load_pdf_by_vlm()
 
     def load_pdf_by_rule(self) -> list[Document]:
@@ -44,7 +44,7 @@ class TextLoadingPipeline:
             list[Document]，将整个pdf的文档作为一个Document对象的结果。
         """
         text_loader = PymupdfTextLoader(self.original_pdf_path)
-        text_loader.set_text_only_loader()
+        text_loader.set_rule_loader()
         text_documents = text_loader.run()
         return text_documents
 
