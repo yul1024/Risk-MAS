@@ -40,7 +40,7 @@ class PymupdfTextLoader:
         lc_documents: list[LCDocument] = self.loader.load()
         return [Document.from_langchain_format(document) for document in lc_documents]
 
-    def set_text_only_loader(self):
+    def set_rule_loader(self):
         """
         仅提取文档中的文字。
         """
