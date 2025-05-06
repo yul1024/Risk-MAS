@@ -7,10 +7,7 @@
 """
 
 from mas.utils import DocumentStoreManager
-from mas.data_processing_pipeline.text_loading_pipeline import TextLoadingPipeline
-from mas.data_processing_pipeline.image_loading_pipeline import ImageLoadingPipeline
 
-from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core import Document
 
 from pathlib import Path
