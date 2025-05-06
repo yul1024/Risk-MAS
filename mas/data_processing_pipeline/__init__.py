@@ -12,5 +12,9 @@
     - 所有pipeline进行预构建，并持久化所有缓存。
 """
 
-from mas.data_processing_pipeline.loading.pre_pdf_loader import PrePdfLoader
+from .global_setting_init_method import pre_load_pdf, init_pipeline_cache
+
+from .loading.pre_pdf_loader import PrePdfLoader
+
+
 
