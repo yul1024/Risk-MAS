@@ -12,5 +12,5 @@
     - 所有pipeline进行预构建，并持久化所有缓存。
 """
 
-from .pre_pdf_loader import PrePdfLoader
+from mas.data_processing_pipeline.loading.pre_pdf_loader import PrePdfLoader
 
