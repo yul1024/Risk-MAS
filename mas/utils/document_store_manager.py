@@ -25,13 +25,14 @@ class DocumentStoreManager:
         path_to_save: str | Path,
     ) -> None:
         """
+        将documents持久化到指定路径。
 
         Args:
-            documents:
-            path_to_save:
+            documents: 在内存中的documents。
+            path_to_save: 指定保存的路径。需要指定.json扩展名。
 
         Returns:
-
+            打印保存位置。
         """
         document_store = SimpleDocumentStore()
         document_store.add_documents(documents)
@@ -43,12 +44,15 @@ class DocumentStoreManager:
         document_store_path: str | Path,
     ) -> list[Document] | list[BaseNode]:
         """
+        从指定路径加载document-store至内存。
+
+        会将原始存储的nodes完全还原为list。
 
         Args:
-            document_store_path:
+            document_store_path: 指定加载的路径。
 
         Returns:
-
+            list[BaseNode]，最初保存的nodes的原始形式。
         """
         document_store = SimpleDocumentStore.from_persist_path(
             persist_path=str(document_store_path)
