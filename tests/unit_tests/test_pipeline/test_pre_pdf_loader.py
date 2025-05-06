@@ -11,7 +11,7 @@ def test_pre_pdf_loader():
         base_image_pdf_dir=r"D:\dataset\risk_mas_t\image_pdf",
         document_store_dir=r"D:\dataset\risk_mas_t\document_store",
     )
-    pre_pdf_loader.batch_process_text(modes=['rule'])
+    pre_pdf_loader.batch_process_text(loading_methods=['rule'])
     pre_pdf_loader.batch_process_image(is_need_convert=True)
 
 
