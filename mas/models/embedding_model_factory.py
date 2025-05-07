@@ -2,7 +2,10 @@
 生成embedding model的工厂。
 """
 
+from mas.models.yu_models.nomic_embed_vision_v15 import NomicEmbedVisionV15
+
 from llama_index.embeddings.openai_like import OpenAILikeEmbedding
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 from llama_index.core.embeddings import BaseEmbedding
 
@@ -38,7 +41,17 @@ class EmbeddingModelFactory:
         self,
         model_key: str,
     ) -> BaseEmbedding:
-        ...
+        # embedding_model = HuggingFaceEmbedding(
+        #     # model_name=r"D:\model\nomic-ai\colnomic-embed-multimodal-7b",
+        #     model_name=r"D:\model\nomic-ai\nomic-embed-text-v1.5",
+        #     trust_remote_code=True
+        # )
+        # return embedding_model
+        my_embedding = NomicEmbedVisionV15(
+            text_model_path=r"D:\model\nomic-ai\nomic-embed-text-v1.5",
+            vision_model_path=r"D:\model\nomic-ai\nomic-embed-vision-v1.5",
+        )
+        return my_embedding
 
 
 if __name__ == '__main__':
