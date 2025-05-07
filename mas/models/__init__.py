@@ -6,6 +6,8 @@
 """
 
 from .embedding_model_factory import EmbeddingModelFactory
+from .embedding_model_info_manager import EmbeddingModelInfoManager
+
 from .llm_factory import LLMFactory
 from .vlm_factory import VLMFactory
 
