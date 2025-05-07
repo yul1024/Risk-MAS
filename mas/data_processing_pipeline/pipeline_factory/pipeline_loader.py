@@ -2,10 +2,14 @@
 实际使用时的pipeline加载器。
 """
 
+
 from mas.data_processing_pipeline.pipeline_factory.pipeline_persistence_manager import PipelinePersistenceManager
 from mas.data_processing_pipeline.pipeline_factory.pipeline_factory import PipelineFactory
 
 from llama_index.core.ingestion import IngestionPipeline
+
+from llama_index.core.schema import BaseNode
+from typing import Sequence
 
 from pathlib import Path
 
@@ -53,6 +57,28 @@ class PipelineLoader:
             pipeline_cache_path=self.cache_dir / 'parsing' / parsing_method,
         )
         return pipeline
+
+    def run_and_save_parsing_pipeline(
+        self,
+        parsing_method: str,
+        nodes: list[BaseNode],
+    ) -> Sequence[BaseNode]:
+        """
+
+        Args:
+            parsing_method:
+            nodes:
+
+        Returns:
+
+        """
+        pipeline = self.load_parsing_pipeline(parsing_method=parsing_method)
+        nodes = pipeline.run(nodes=nodes)
+        self.pipeline_persistence_manager.save_pipeline(
+            pipeline=pipeline,
+            path_to_save=self.cache_dir / 'parsing' / parsing_method,
+        )
+        return nodes
 
     def load_embedding_model_pipeline(
         self,
