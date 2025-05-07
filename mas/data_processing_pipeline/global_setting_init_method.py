@@ -71,7 +71,7 @@ def init_pipeline_cache(
         pipeline_cache_content=pipeline_cache_content,
     )
     pipeline_builder.init_parsing_pipeline()
-    pipeline_builder.init_embedding_pipeline()
+    # pipeline_builder.init_embedding_pipeline()
 
 
 if __name__ == '__main__':
